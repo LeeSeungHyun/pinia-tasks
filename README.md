@@ -85,7 +85,7 @@ export const useTaskStore = defineStore('taskStore', {
 ```
 
 **TaskForm.vue**
-```javascript
+```vue
 <template>
   <form @submit.prevent="handleSubmit">
     <input 
