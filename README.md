@@ -9,8 +9,8 @@ Vue 공식 문서에서 권고하고 있는 새로운 상태 관리 라이브러
 
 ## Store 생성 및 사용
 
-TaskStore.js
-```javscript
+**TaskStore.js**
+```javascript
 import { defineStore } from 'pinia'
 
 export const useTaskStore = defineStore('taskStore', {
@@ -84,8 +84,8 @@ export const useTaskStore = defineStore('taskStore', {
 })
 ```
 
-TaskForm.vue
-```javscript
+**TaskForm.vue**
+```javascript
 <template>
   <form @submit.prevent="handleSubmit">
     <input 
