@@ -7,11 +7,12 @@ Vue 공식 문서에서 권고하고 있는 새로운 상태 관리 라이브러
 - Vuex와 달리 Pinia에는 mutation이 없다.
 - Typescript 지원
 
+## Store 생성 및 사용
 
-``` javscript
+TaskStore.js
+```javscript
 import { defineStore } from 'pinia'
 
-//store 생성
 export const useTaskStore = defineStore('taskStore', {
   state: () => ({
     tasks: [],
@@ -81,4 +82,42 @@ export const useTaskStore = defineStore('taskStore', {
     }
   }
 })
+```
+
+TaskForm.vue
+```javscript
+<template>
+  <form @submit.prevent="handleSubmit">
+    <input 
+      type="text" 
+      placeholder="I need to..."
+      v-model="newTask"
+    >
+    <button>Add</button>
+  </form>
+</template>
+
+<script>
+import { ref } from 'vue'
+import { useTaskStore } from '../stores/TaskStore'
+export default {
+  setup() {
+    // store 객체 접근
+    const taskStore = useTaskStore()
+    const newTask = ref('')
+    const handleSubmit = () => {
+      if (newTask.value.length > 0) {
+        // Action 함수 실행
+        taskStore.addTask({
+          title: newTask.value,
+          isFav: false,
+          id: Math.floor(Math.random() * 1000000)
+        })
+        newTask.value = ""
+      }
+    }
+    return { handleSubmit, newTask }
+  }
+}
+</script>
 ```
